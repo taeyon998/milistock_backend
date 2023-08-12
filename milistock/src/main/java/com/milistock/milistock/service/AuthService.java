@@ -25,7 +25,7 @@ public class AuthService {
         if (!userpassword.equals(userpasswordCheck))
             return ResponseDto.setFailed("Pswd does not match!");
 
-        // dto를 통해 프론트에서 받아온 데이터로 user object 만듬
+        // dto를 통해 프론트에서 받아온 데이터로 user ENTITY 만듬
         UserEntity userEntity = new UserEntity(dto);
 
         // Repo를 통해 DB에 저장

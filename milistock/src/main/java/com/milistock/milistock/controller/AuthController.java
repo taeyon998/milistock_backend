@@ -21,7 +21,10 @@ public class AuthController {
     public ResponseDto<?> signUp(@RequestBody SignUpDto requestBody) {
         System.out.println(requestBody.toString()); // optional, delete later
 
+        // Service에서 백엔드 로직 (예: 중복id 확인) 후 repo를 통해 DB로 보냄
         ResponseDto<?> result = authService.signUp(requestBody);
+
+        // Controller는 다시 프론트로 보냄
         return result;
     }
 }
