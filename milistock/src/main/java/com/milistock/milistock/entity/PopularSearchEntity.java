@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="PopularSearch")
-@Table(name="PopularSearch")
+@Table(name="popularSearch")
 public class PopularSearchEntity {
     @Id
     private String popularTerm;

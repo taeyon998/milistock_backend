@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="User")
-@Table(name="User")
+@Table(name="user")
 public class UserEntity {
     @Id
     private String userEmail;
