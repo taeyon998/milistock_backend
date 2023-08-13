@@ -40,7 +40,9 @@ public class AuthService {
         return ResponseDto.setSuccess("Sign Up Success!", null);
     }
 
-    // public ResponseDto<SigninResponseDto> signIn(SignInDto dto){
-
-    // }
+    public ResponseDto<SigninResponseDto> signIn(SignInDto dto){
+        String userEmail = dto.getUserEmail();
+        String userPassword = dto.getUserPassword();
+        boolean existed = userRepository.existsByEmailAndUserPassword(userEmail, userPassword);
+    }
 }
