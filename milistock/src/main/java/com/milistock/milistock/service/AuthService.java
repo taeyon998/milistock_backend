@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.milistock.milistock.dto.ResponseDto;
+import com.milistock.milistock.dto.SignInDto;
 import com.milistock.milistock.dto.SignUpDto;
+import com.milistock.milistock.dto.SigninResponseDto;
 import com.milistock.milistock.entity.UserEntity;
 import com.milistock.milistock.repository.UserRepository;
 
@@ -37,4 +39,8 @@ public class AuthService {
 
         return ResponseDto.setSuccess("Sign Up Success!", null);
     }
+
+    // public ResponseDto<SigninResponseDto> signIn(SignInDto dto){
+
+    // }
 }

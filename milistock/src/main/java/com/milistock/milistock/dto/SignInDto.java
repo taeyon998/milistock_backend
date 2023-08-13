@@ -1,7 +1,6 @@
 package com.milistock.milistock.dto;
 
-import com.milistock.milistock.entity.UserEntity;
-
+// import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SigninResponseDto {
-    private String token;
-    private int exprTime;
-    private UserEntity user;
+public class SignInDto {
+    // @NotBlank
+    private String userEmail;
+    private String userPassword;
 }
