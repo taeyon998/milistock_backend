@@ -30,6 +30,7 @@ public class AuthController {
 
     @PostMapping("/signIn")
     public ResponseDto<SigninResponseDto> signIn(@RequestBody SignInDto requestBody){
-        return null;
+        ResponseDto<SigninResponseDto> result = authService.signIn(requestBody);
+        return result;
     }
 }

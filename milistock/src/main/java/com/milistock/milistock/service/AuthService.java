@@ -9,11 +9,14 @@ import com.milistock.milistock.dto.SignUpDto;
 import com.milistock.milistock.dto.SigninResponseDto;
 import com.milistock.milistock.entity.UserEntity;
 import com.milistock.milistock.repository.UserRepository;
+import com.milistock.milistock.security.TokenProvider;
 
 @Service
 public class AuthService {
 
     @Autowired UserRepository userRepository;
+
+    @Autowired TokenProvider tokenProvider;
 
     public ResponseDto<?> signUp(SignUpDto dto) {
         String userEmail = dto.getUserEmail();
@@ -43,6 +46,27 @@ public class AuthService {
     public ResponseDto<SigninResponseDto> signIn(SignInDto dto){
         String userEmail = dto.getUserEmail();
         String userPassword = dto.getUserPassword();
-        boolean existed = userRepository.existsByEmailAndUserPassword(userEmail, userPassword);
+        try {
+            boolean existed = userRepository.existsByEmailAndUserPassword(userEmail, userPassword);
+            if (!existed) return ResponseDto.setFailed("Signin info does not match");
+        } catch (Exception error) {
+            return ResponseDto.setFailed("Database Error");
+        }
+
+        UserEntity userEntity = null;
+        try {
+            userEntity = userRepository.findById(userEmail).get();
+        } catch (Exception error) {
+            return ResponseDto.setFailed("Database Error");
+        }
+        
+        userEntity.setUserPassword("");
+
+        // 핵심! Token을 만듬
+        String token = tokenProvider.create(userEmail);
+        int exprTime = 3600000;
+
+        SigninResponseDto signInResponseDto = new SigninResponseDto(token, exprTime, userEntity);
+        return ResponseDto.setSuccess("Sign In Success", signInResponseDto);
     }
 }
