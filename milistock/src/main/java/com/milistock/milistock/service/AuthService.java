@@ -46,13 +46,16 @@ public class AuthService {
     public ResponseDto<SigninResponseDto> signIn(SignInDto dto){
         String userEmail = dto.getUserEmail();
         String userPassword = dto.getUserPassword();
+
+        // 회원가입 했는지 확인 (JWT랑 상관 x)
         try {
-            boolean existed = userRepository.existsByEmailAndUserPassword(userEmail, userPassword);
+            boolean existed = userRepository.existsByuserEmailAndUserPassword(userEmail, userPassword);
             if (!existed) return ResponseDto.setFailed("Signin info does not match");
         } catch (Exception error) {
             return ResponseDto.setFailed("Database Error");
         }
-
+        
+        // userEntity 만듬
         UserEntity userEntity = null;
         try {
             userEntity = userRepository.findById(userEmail).get();
@@ -62,7 +65,7 @@ public class AuthService {
         
         userEntity.setUserPassword("");
 
-        // 핵심! Token을 만듬
+        // 핵심! Token을 만듬 (JWT)
         String token = tokenProvider.create(userEmail);
         int exprTime = 3600000;
 

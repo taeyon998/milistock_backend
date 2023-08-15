@@ -7,5 +7,5 @@ import com.milistock.milistock.entity.UserEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String> {
-    public boolean existsByEmailAndUserPassword(String userEmail, String userPassword);
+    public boolean existsByuserEmailAndUserPassword(String userEmail, String userPassword);
 }
